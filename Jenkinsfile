@@ -9,11 +9,11 @@ pipeline {
             }
         }
 
-        stage('Start Existing Container') {
+        stage('Detener contenedor') {
             steps {
                 script {
                     // Comando para iniciar un contenedor existente
-                    sh "docker start mysql_server"
+                    sh "docker stop mysql_server"
                 }
             }
         }
