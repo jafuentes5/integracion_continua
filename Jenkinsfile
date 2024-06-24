@@ -26,7 +26,7 @@ pipeline {
             }
         }
 
-        /*stage('Run Python App') {
+        stage('Run Python App') {
             steps {
                 script {
                     docker.image('python-app-image').run()
@@ -34,6 +34,7 @@ pipeline {
             }
         }
 
+        /*
         stage('Detener contenedor') {
             steps {
                 script {
