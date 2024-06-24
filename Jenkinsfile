@@ -9,7 +9,7 @@ pipeline {
             }
         }
 
-        stage('Build and Run Python App') {
+        /*stage('Build and Run Python App') {
             steps {
                 script {
                     // Construir la imagen Docker con Python
@@ -19,6 +19,6 @@ pipeline {
                     dockerImage.run('-p 5000:5000', '--name python-app-container')
                 }
             }
-        }
+        }*/
     }
 }
