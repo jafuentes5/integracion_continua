@@ -9,16 +9,14 @@ pipeline {
             }
         }
 
-        /*stage('Build and Run Python App') {
+        stage('Start Existing Container') {
             steps {
                 script {
-                    // Construir la imagen Docker con Python
-                    def dockerImage = docker.build('python-app-image', '.')
-                    
-                    // Ejecutar el contenedor Docker
-                    dockerImage.run('-p 5000:5000', '--name python-app-container')
+                    // Comando para iniciar un contenedor existente
+                    sh "docker start mysql_server"
                 }
             }
-        }*/
+        }
+        // Puedes agregar más etapas del pipeline según sea necesario
     }
 }
