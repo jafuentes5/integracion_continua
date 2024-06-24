@@ -23,7 +23,7 @@ pipeline {
 
                     writeFile file: 'Dockerfile', text: dockerfile
 
-                    sh "docker.build('python-app-image', '-f Dockerfile .')"
+                    docker.build('python-app-image', '-f Dockerfile .')
                 }
             }
         }
