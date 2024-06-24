@@ -14,9 +14,7 @@ pipeline {
                 script {
                     def dockerfile = """
                         FROM python:3.9-slim
-                        WORKDIR /app
-                        COPY app/requirements.txt ./
-                        RUN pip install --no-cache-dir -r requirements.txt
+                        WORKDIR /app                        
                         COPY app/test.py .
                         CMD ["python", "test.py"]
                     """
