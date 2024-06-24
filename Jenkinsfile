@@ -16,7 +16,7 @@ pipeline {
                         FROM python:3.9-slim
                         WORKDIR /app                        
                         COPY app/test.py .
-                        CMD ["python", "test.py"]
+                        CMD ["python", app/"test.py"]
                     """
 
                     writeFile file: 'Dockerfile', text: dockerfile
@@ -29,12 +29,28 @@ pipeline {
         stage('Run Python App') {
             steps {
                 script {
-                    docker.image('python-app-image').run()
+                    // Ejecutar el contenedor
+                    def dockerRunCommand = 'docker run --name python-app-container python-app-image'
+                    def proc = sh(script: dockerRunCommand, returnStatus: true)
+                    
+                    // Verificar el estado de salida del contenedor
+                    if (proc == 0) {
+                        echo 'Contenedor ejecutado exitosamente.'
+                    } else {
+                        error 'Error al ejecutar el contenedor.'
+                    }
                 }
             }
         }
 
         /*
+        stage('Run Python App') {
+            steps {
+                script {
+                    docker.image('python-app-image').run()
+                }
+            }
+        }
         stage('Detener contenedor') {
             steps {
                 script {
