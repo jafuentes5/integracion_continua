@@ -16,7 +16,7 @@ pipeline {
                         FROM python:3.9-slim
                         WORKDIR /app                        
                         COPY app/test.py .
-                        CMD ["python", app/"test.py"]
+                        CMD ["python", "test.py"]
                     """
 
                     writeFile file: 'Dockerfile', text: dockerfile
