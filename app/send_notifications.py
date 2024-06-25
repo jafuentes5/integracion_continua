@@ -7,9 +7,10 @@ from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 
 def read_database():
+    cursor = None
     try:
         #Se realiza conexión y se ejecutan las consultas correspondientes
-        cnx = mysql.connector.connect(user='root', database='notifications', host='localhost', password='prueba2024*')
+        cnx = mysql.connector.connect(user='root', database='notifications', host='localhost', password='prueba2024*', port=3306)
         cursor = cnx.cursor(buffered=True)
         query = ("SELECT * from host_notifications where notification_status = 'not send'")
         cursor.execute(query)
@@ -61,4 +62,5 @@ if __name__ == "__main__":
     #Se lee la base de datos y se envian mensajes
     while True:
         read_database()
+        print("Esperando")
         time.sleep(10)
