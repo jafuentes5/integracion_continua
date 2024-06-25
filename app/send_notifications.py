@@ -8,6 +8,7 @@ from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 
 #Se define diccionario con las propiedades de conexión
+
 connection_config = {
     "user":"root",
     "database":"notifications",
