@@ -76,10 +76,10 @@ def send_message(notification_type, hostname, hoststate = None, hostoutput=None,
         message["To"] = "jafuentes5@poligran.edu.co"
         if hoststate != None:        
             message["Subject"] = f"** {notification_type} Host Alert: {hostname} Status is {hoststate} **"
-            message.set_content(f"Notification type: {notification_type}\nHost Name: {hostname}\nHost State: {hoststate}\nAdditional info:{hostoutput}\n\nDate: {str(datetime)}")
+            message.set_content(f"Notification type: {notification_type}\nHost Name: {hostname}\nHost State: {hoststate}\nAdditional info: {hostoutput}\n\nDate: {str(datetime)}")
         else:
             message["Subject"] = f"** {notification_type} Service Alert: {hostname} Status is {servicestate} **"
-            message.set_content(f"Notification type: {notification_type}\nHost Name: {hostname}\Service State: {servicestate}\nAdditional info:{serviceoutput}\n\nDate: {str(datetime)}")
+            message.set_content(f"Notification type: {notification_type}\nHost Name: {hostname}\Service State: {servicestate}\nAdditional info: {serviceoutput}\n\nDate: {str(datetime)}")
         #Se codifica el mensaje y se envia
         encoded_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
         create_message = {"raw": encoded_message}
