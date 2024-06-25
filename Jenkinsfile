@@ -23,7 +23,7 @@ pipeline {
                         #Se copian los archivos necesarios
                         COPY app/requirements.txt .                  
                         COPY app/test.py .
-                        COPY token.json
+                        COPY app/token.json
 
                         #Se instalan los paquetes requeridos en requirements.txt
                         RUN pip install --no-cache-dir -r requirements.txt
