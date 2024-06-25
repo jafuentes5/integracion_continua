@@ -21,7 +21,7 @@ pipeline {
                         WORKDIR /app      
 
                         #Se copian los archivos necesarios
-                        COPY app/send_notifications.py/
+                        COPY app/send_notifications.py app/
                         COPY token.json .
                         COPY requirements.txt .
 
