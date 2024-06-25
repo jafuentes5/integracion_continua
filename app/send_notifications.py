@@ -13,7 +13,7 @@ connection_config = {
     "database":"notifications",
     #"host":"localhost",
     "host":"mysql-container",
-    "password":"prueba2024*",
+    "password":"prueba2024*" ,
     "port":3306
 }
 
