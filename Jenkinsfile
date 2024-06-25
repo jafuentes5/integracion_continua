@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage("Checkout") {
             steps {
                 //Se clona el repositorio donde esta la aplicación que se ejecutará 
                 // para el envío de notificaciones
@@ -10,7 +10,7 @@ pipeline {
             }
         }        
         
-        stage('Se crea la imagen de docker') {
+        stage("Se crea la imagen de docker") {
             steps {
                 script {
                     def dockerfile = """
@@ -29,7 +29,7 @@ pipeline {
                         RUN pip install --no-cache-dir -r requirements.txt
 
                         #Se establece el comando por defecto que ejecutara la imagen
-                        CMD ["python", "app/test.py"]
+                        CMD ["python", "app/send_notifications.py"]
 
 
                     """
@@ -39,9 +39,8 @@ pipeline {
                 }
             }
         }
-
-        /*
-        stage('Run Python App') {
+        
+        stage("Se ejecuta la aplicacion de python") {
             steps {
                 script {
                     // Ejecutar el contenedor
@@ -56,6 +55,6 @@ pipeline {
                     }
                 }
             }
-        } */       
+        }      
     }
 }
