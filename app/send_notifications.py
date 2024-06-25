@@ -83,7 +83,7 @@ def send_message(notification_type, hostname, hostaddress = None, hoststate = No
         #Se codifica el mensaje y se envia
         encoded_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
         create_message = {"raw": encoded_message}
-        send_message = (
+        send_message  = (
             service.users()
             .messages()
             .send(userId="me", body=create_message)
