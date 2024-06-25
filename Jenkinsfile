@@ -5,6 +5,7 @@ pipeline {
     }
 
     stages {
+        
         stage("Checkout") {
             steps {
                 //Se clona el repositorio donde esta la aplicación que se ejecutará 
