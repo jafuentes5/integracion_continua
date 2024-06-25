@@ -4,29 +4,34 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Clonar el repositorio
+                //Se clona el repositorio donde esta la aplicación que se ejecutará 
+                // para el envío de notificaciones
                 git url: 'https://github.com/jafuentes5/integracion_continua.git', branch: 'master'
             }
-        }
-
-        stage("Instalación requerimientos"){
-            steps {
-                script {
-                    sh "pip3 install -r app/requirements.txt"
-                }
-            }
-        }
-
-        /*
+        }        
+        
         stage('Se crea la imagen de docker') {
             steps {
                 script {
                     def dockerfile = """
+                        #Se especifica la imagen base
                         FROM python:3.9-slim
-                        WORKDIR /app                        
+
+                        #Se establece el directorio de trabajo en el contenedor
+                        WORKDIR /app      
+
+                        #Se copian los archivos necesarios
+                        COPY app/requirements.txt .                  
                         COPY app/test.py .
                         COPY token.json
+
+                        #Se instalan los paquetes requeridos en requirements.txt
+                        RUN pip install --no-cache-dir -r requirements.txt
+
+                        #Se establece el comando por defecto que ejecutara la imagen
                         CMD ["python", "test.py"]
+
+
                     """
                     writeFile file: 'Dockerfile', text: dockerfile
 
@@ -35,6 +40,7 @@ pipeline {
             }
         }
 
+        /*
         stage('Run Python App') {
             steps {
                 script {
@@ -50,24 +56,6 @@ pipeline {
                     }
                 }
             }
-        }
-
-        /*
-        stage('Run Python App') {
-            steps {
-                script {
-                    docker.image('python-app-image').run()
-                }
-            }
-        }
-        stage('Detener contenedor') {
-            steps {
-                script {
-                    // Comando para iniciar un contenedor existente
-                    sh "docker stop mysql_server"
-                }
-            }
-        }*/
-        // Puedes agregar más etapas del pipeline según sea necesario*/
+        } */       
     }
 }
