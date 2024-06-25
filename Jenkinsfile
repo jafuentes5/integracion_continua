@@ -1,11 +1,8 @@
 pipeline {
     agent any
-    triggers{
-        githubPush()
-    }
-
+    
     stages {
-        
+
         stage("Checkout") {
             steps {
                 //Se clona el repositorio donde esta la aplicación que se ejecutará 
