@@ -11,7 +11,7 @@ pipeline {
             }
         }        
         
-        /*
+        
         stage("Se crea la imagen de docker") {
             steps {
                 script {
@@ -20,7 +20,7 @@ pipeline {
                 }
             }
         }
-        
+        /*
         stage("Se ejecuta la aplicacion de python") {
             steps {
                 script {
