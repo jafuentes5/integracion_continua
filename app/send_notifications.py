@@ -8,7 +8,7 @@ from googleapiclient.discovery import build
 
 def read_b():
     cursor = None
-    cnx = mysql.connector.connect(user='root', database='notifications', host='localhost', password='prueba2024*', port=3306)
+    cnx = mysql.connector.connect(user='root', database='notifications', host='mysql-containerb', password='prueba2024*', port=3306)
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT * from host_notifications where notification_status = 'not send'")
     cursor.execute(query)

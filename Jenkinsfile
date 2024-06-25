@@ -19,14 +19,13 @@ pipeline {
 
                         #Se establece el directorio de trabajo en el contenedor
                         WORKDIR /app      
-
                         #Se copian los archivos necesarios
                         COPY app/send_notifications.py app/
                         COPY token.json .
                         COPY requirements.txt .
 
                         #Se instalan los paquetes requeridos en requirements.txt
-                        RUN pip install --no-cache-dir -r requirements.txt
+                        RUN pip install --no-cache-dir -r requirements.txt                        
 
                         #Se establece el comando por defecto que ejecutara la imagen
                         CMD ["python", "app/send_notifications.py"]
@@ -44,7 +43,7 @@ pipeline {
             steps {
                 script {
                     // Ejecutar el contenedor
-                    def dockerRunCommand = 'docker run --name python-app-container python-app-image'
+                    def dockerRunCommand = 'docker run --name python-app-container --network test-network python-app-image'
                     def proc = sh(script: dockerRunCommand, returnStatus: true)
                     
                     // Verificar el estado de salida del contenedor
