@@ -11,8 +11,8 @@ from googleapiclient.discovery import build
 connection_config = {
     "user":"root",
     "database":"notifications",
-    "host":"localhost",
-    #"host":"mysql-container",
+    #"host":"localhost",
+    "host":"mysql-container",
     "password":"prueba2024*",
     "port":3306
 }
