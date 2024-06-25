@@ -11,7 +11,7 @@ pipeline {
             }
         }        
         
-        stage("Se crea la imagen de docker") {
+        stage("Se crea la imagen de dockerr") {
             steps {
                 script {
                     //Se construye la imagen del contenedor teniendo en cuenta el docker file
