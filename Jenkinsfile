@@ -21,15 +21,15 @@ pipeline {
                         WORKDIR /app      
 
                         #Se copian los archivos necesarios
-                        COPY requirements.txt .                  
-                        COPY app/test.py .
+                        COPY app/test.py app/
                         COPY token.json .
+                        COPY requirements.txt .
 
                         #Se instalan los paquetes requeridos en requirements.txt
                         RUN pip install --no-cache-dir -r requirements.txt
 
                         #Se establece el comando por defecto que ejecutara la imagen
-                        CMD ["python", "test.py"]
+                        CMD ["python", "app/test.py"]
 
 
                     """
