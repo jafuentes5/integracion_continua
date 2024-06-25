@@ -9,6 +9,15 @@ pipeline {
             }
         }
 
+        stage("Instalación requerimientos"){
+            steps {
+                script {
+                    sh "pip install -r app/requirements.txt"
+                }
+            }
+        }
+
+        /*
         stage('Se crea la imagen de docker') {
             steps {
                 script {
@@ -16,9 +25,9 @@ pipeline {
                         FROM python:3.9-slim
                         WORKDIR /app                        
                         COPY app/test.py .
+                        COPY token.json
                         CMD ["python", "test.py"]
                     """
-
                     writeFile file: 'Dockerfile', text: dockerfile
 
                     docker.build('python-app-image', '-f Dockerfile .')
@@ -59,6 +68,6 @@ pipeline {
                 }
             }
         }*/
-        // Puedes agregar más etapas del pipeline según sea necesario
+        // Puedes agregar más etapas del pipeline según sea necesario*/
     }
 }
