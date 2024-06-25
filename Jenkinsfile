@@ -12,7 +12,7 @@ pipeline {
         stage("Instalación requerimientos"){
             steps {
                 script {
-                    sh "pip install -r app/requirements.txt"
+                    sh "pip3 install -r app/requirements.txt"
                 }
             }
         }
