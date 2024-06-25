@@ -13,27 +13,7 @@ pipeline {
         stage("Se crea la imagen de docker") {
             steps {
                 script {
-                    def dockerfile = """
-                        #Se especifica la imagen base
-                        FROM python:3.9-slim
-
-                        #Se establece el directorio de trabajo en el contenedor
-                        WORKDIR /app      
-                        #Se copian los archivos necesarios
-                        COPY app/send_notifications.py app/
-                        COPY token.json .
-                        COPY requirements.txt .
-
-                        #Se instalan los paquetes requeridos en requirements.txt
-                        RUN pip install --no-cache-dir -r requirements.txt                        
-
-                        #Se establece el comando por defecto que ejecutara la imagen
-                        CMD ["python", "app/send_notifications.py"]
-
-
-                    """
-                    writeFile file: 'Dockerfile', text: dockerfile
-
+                    //Se construye la imagen del contenedor teniendo en cuenta el docker file
                     docker.build('python-app-image', '-f Dockerfile .')
                 }
             }
