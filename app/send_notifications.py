@@ -11,8 +11,8 @@ from googleapiclient.discovery import build
 connection_config = {
     "user":"root",
     "database":"notifications",
-    #"host":"localhost",
-    "host":"mysql-container",
+    "host":"localhost",
+    #"host":"mysql-container",
     "password":"prueba2024*",
     "port":3306
 }
@@ -56,7 +56,7 @@ def update_database(record_id):
         cursor.close()
         cnx.close()
 
-def send_message(notification_type, hostname, hoststate = None, hostoutput=None, servicestate = None, serviceoutput = None, datetime = None):
+def send_message(notification_type, hostname, hostaddress = None, hoststate = None, hostoutput=None, servicedesc = None, servicestate = None, serviceoutput = None, datetime = None):
     try:
         #Se definen los alcances del api en cuestion
         SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
@@ -76,10 +76,10 @@ def send_message(notification_type, hostname, hoststate = None, hostoutput=None,
         message["To"] = "jafuentes5@poligran.edu.co"
         if hoststate != None:        
             message["Subject"] = f"** {notification_type} Host Alert: {hostname} Status is {hoststate} **"
-            message.set_content(f"Notification type: {notification_type}\nHost Name: {hostname}\nHost State: {hoststate}\nAdditional info: {hostoutput}\n\nDate: {str(datetime)}")
+            message.set_content(f"Notification type: {notification_type}\nHost Name: {hostname}\nHost Address: {hostaddress}\nHost State: {hoststate}\nAdditional info: {hostoutput}\n\nDate: {str(datetime)}")
         else:
-            message["Subject"] = f"** {notification_type} Service Alert: {hostname} Status is {servicestate} **"
-            message.set_content(f"Notification type: {notification_type}\nHost Name: {hostname}\Service State: {servicestate}\nAdditional info: {serviceoutput}\n\nDate: {str(datetime)}")
+            message["Subject"] = f"** {notification_type} Service Alert: {servicedesc} on {hostname} Status is {servicestate} **"
+            message.set_content(f"Notification type: {notification_type}\nHost Name: {hostname}\nService description: {servicedesc}\nService State: {servicestate}\nAdditional info: {serviceoutput}\n\nDate: {str(datetime)}")
         #Se codifica el mensaje y se envia
         encoded_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
         create_message = {"raw": encoded_message}
@@ -102,7 +102,7 @@ if __name__ == "__main__":
             records = result_read_database[2]
             for record in records:
                 #Se intenta enviar mensaje de notificacion por correo                
-                result_send_message = send_message(*record[1:8])
+                result_send_message = send_message(*record[1:10])
                 if result_send_message == True:
                     #Se actualiza el registro en la base de datos para indicar que se envio el mensaje
                     result_update_record = update_database(record[0])
