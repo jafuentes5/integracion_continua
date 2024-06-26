@@ -11,7 +11,6 @@ pipeline {
             }
         }        
         
-        /*
         stage("Se crea la imagen de docker") {
             steps {
                 script {
@@ -29,6 +28,6 @@ pipeline {
                     sh dockerRunCommand                  
                 }
             }
-        }      */
+        }
     }
 }
